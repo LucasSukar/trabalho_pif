@@ -224,13 +224,20 @@ int main(){
                     codigo_pre_jogo();
                     fimdejogo = 0;
                     while (fimdejogo != 1){
+                        timerInit(0); // Add the missing argument to the timerInit() function call
                         jogo(); 
                         teclado();
                         Logica();
                     }
-                    clear_screen();
+                    clear_screen(); 
+                    timerTimeOver();
                     printf("\n");
                     printf("Sua pontuacao: %d", pontuacao);
+                    printf("\n");
+                    printf("seu tempo vivo: ");
+                    timerPrint();
+                    timerDestroy();
+                    printf("\n");
                     salva_pontuacao(&head, pontuacao);
                     printf("\n");
                     printf("Digite 1 para jogar novamente ou 0 para sair: ");
@@ -250,6 +257,11 @@ int main(){
             printf("\n");
             system("pause"); // pausa o sistema e so continua se a pessoa precionar alguma tecla
             clear_screen();
+        }
+    }
+    return 0;
+}
+
         }
     }
     return 0;
