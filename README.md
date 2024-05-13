@@ -8,20 +8,21 @@ Lucas Ferreira Sukar Wanderley;
 
 
 
+#include <string.h>
+#include "screen.h"
+#include "keyboard.h"
+#include "timer.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
-#include <windows.h>
 #include <math.h>
 #include <time.h>
-
 
 int matriz[20][20];
 int largura = 20, altura = 20;
 int x, y; // Posição da cabeça da cobra
 int frutax, frutay; // Posição da fruta
 int tecla;
-int tamanhocobra; 
+int tamanhocobra;
 int cobrax[100], cobray[100]; // Posição do corpo da cobra
 int pontuacao;
 int fimdejogo;
@@ -41,7 +42,7 @@ void codigo_pre_jogo() {
 
 // Função que desenha o estado atual do jogo na tela
 void jogo(){
-    system("cls"); // Limpa a tela
+    clear_screen(); // Limpa a tela
     // Percorre a matriz representando o tabuleiro do jogo e desenha cada elemento (borda, cabeça da cobra, fruta, corpo da cobra)
     for (int i = 0; i < 20; i++) {
         for (int j = 0; j < 20; j++) {
@@ -104,11 +105,11 @@ void Logica(){
     // Controla a velocidade do jogo com base na pontuação
     if (tecla == 1 || tecla == 2 || tecla == 3 || tecla == 4) {
         if (pontuacao < 5) {
-            Sleep(100); //aqui é para a cobra andar mais devagar
+            sleep_ms(100); //aqui é para a cobra andar mais devagar
         } else if (pontuacao >= 5 && pontuacao < 10) {
-            Sleep(50); //aqui é para a cobra andar mais rápido
+            sleep_ms(50); //aqui é para a cobra andar mais rápido
         } else if (pontuacao >= 10) {
-            Sleep(25); //aqui é para a cobra andar mais rápido ainda    
+            sleep_ms(25); //aqui é para a cobra andar mais rápido ainda    
         }
     }
 
@@ -138,8 +139,8 @@ void Logica(){
 
 // Função que verifica se alguma tecla foi pressionada
 void teclado(){
-    if (_kbhit()) {
-        char c = _getch();
+    if (is_key_pressed()) {
+        char c = get_key();
         if(c == 'w'){
             tecla = 1;
         } else if(c == 's'){
@@ -160,7 +161,7 @@ struct jogador{
 };
 
 // Função para adicionar um novo jogador à lista
-void jogador(struct jogador **head){
+void novo_jogador(struct jogador **head){
     struct jogador *novo = NULL;
     novo = (struct jogador *)malloc(sizeof(struct jogador));
     printf("Digite o nome do novo jogador: ");
@@ -169,8 +170,7 @@ void jogador(struct jogador **head){
     novo->next = NULL;
     if(*head == NULL){
         *head = novo;
-    } 
-    else{
+    } else{
         struct jogador *temp = *head;
         while( temp->next != NULL){
             temp = temp->next;
@@ -189,7 +189,7 @@ void salva_pontuacao(struct jogador **head, int pontuacao){
 }
 
 // Função para exibir o ranking dos jogadores
-void rank(struct jogador **head){
+void exibe_ranking(struct jogador **head){
     struct jogador *temp = *head;
     if(temp == NULL){
         printf("Nenhum jogador cadastrado\n");
@@ -217,9 +217,9 @@ int main(){
         printf(":");
         scanf("%d", &x);
         if(x == 1){
-            system("cls");
+            clear_screen();
             while(1){
-                jogador(&head);
+                novo_jogador(&head);
                 while (1){
                     codigo_pre_jogo();
                     fimdejogo = 0;
@@ -228,7 +228,7 @@ int main(){
                         teclado();
                         Logica();
                     }
-                    system("cls");
+                    clear_screen();
                     printf("\n");
                     printf("Sua pontuacao: %d", pontuacao);
                     salva_pontuacao(&head, pontuacao);
@@ -237,7 +237,7 @@ int main(){
                     int opcao;
                     scanf("%d", &opcao);
                     if(opcao == 0){
-                        system("cls");
+                        clear_screen();
                         break;
                     }
                 }
@@ -245,11 +245,11 @@ int main(){
             }
         }
         if(x == 2){
-            system("cls");
-            rank(&head);
+            clear_screen();
+            exibe_ranking(&head);
             printf("\n");
             system("pause"); // pausa o sistema e so continua se a pessoa precionar alguma tecla
-            system("cls");
+            clear_screen();
         }
     }
     return 0;
