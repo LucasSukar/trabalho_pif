@@ -1,9 +1,8 @@
 # SNAKE-PIF
-
-# EQUIPE
-André Luis Castro Monteiro e Silva;
-Caio Lima Bezerra;
-Lucas Ferreira Sukar Wanderley;
+    EQUIPE
+        André Luis Castro Monteiro e Silva;
+        Caio Lima Bezerra;
+        Lucas Ferreira Sukar Wanderley;
 
 
 
