@@ -1,7 +1,6 @@
-# trabalho_pif
-trabalho pif - jogo snake
+# SNAKE-PIF
 
-Equipe:
+# EQUIPE
 André Luis Castro Monteiro e Silva;
 Caio Lima Bezerra;
 Lucas Ferreira Sukar Wanderley;
