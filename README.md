@@ -8,7 +8,7 @@
   - Caio Lima Bezerra;
   - Lucas Ferreira Sukar Wanderley;
 
-# codigo: 
+codigo: 
 
 #include <string.h>
 #include "screen.h"
