@@ -35,10 +35,10 @@ void codigo_pre_jogo() {
     pontuacao = 0; // Inicializa a pontuação do jogador
     tamanhocobra = 0; // Inicializa o tamanho da cobra
     // Configuração da posição inicial da fruta
-    do {
+    while (frutax <= 0 || frutay <= 0 || frutax == x || frutay == y || frutax > altura || frutay > largura){ // Garante que a fruta não apareça na mesma posição que a cabeça da cobra ou nas bordas
         frutax = 1 + rand() % (largura - 2); // Gera uma posição aleatória no eixo x para a fruta tem -2 para ser gerado dentro das bordas
         frutay = 1 + rand() % (altura - 2); // Gera uma posição aleatória no eixo y para a fruta tem -2 para ser gerado dentro das bordas
-    } while (frutax <= 0 || frutay <= 0 || frutax == x || frutay == y || frutax > altura || frutay > largura); // Garante que a fruta não apareça na mesma posição que a cabeça da cobra ou nas bordas
+    }
 }
 
 // Função que desenha o estado atual do jogo na tela
@@ -137,10 +137,10 @@ void Logica(){
         pontuacao += 1;
         tamanhocobra++;
         // Reposiciona a fruta em um local aleatório
-        do {
+        while (frutax == x || frutay == y || matriz[frutax][frutay] != ' '){ // Garante que a fruta não apareça na mesma posição que a cabeça da cobra ou em uma parte ocupada do tabuleiro
             frutax = 1 + rand() % (largura - 2); // Assegura que a fruta apareça dentro das bordas por isso o -2
             frutay = 1 + rand() % (altura - 2); 
-        } while (frutax == x || frutay == y || matriz[frutax][frutay] != ' '); // Garante que a fruta não apareça na mesma posição que a cabeça da cobra ou em uma parte ocupada do tabuleiro
+        }
 
     }
 }
